@@ -1,0 +1,280 @@
+//Displaying html tag in react
+
+import React from 'react';
+
+class App extends React.Component {
+   render() {
+      return (
+         <div>
+            Hello World!!!
+         </div>
+      );
+   }
+}
+export default App;
+------------------------------------------------------------
+
+//Displaying using class
+
+class Button extends React.Component{
+	render(){
+		return (
+		<button>Click Me!!</button>  	
+		);
+	}
+}
+ReactDOM.render(<Button/>,mountNode);
+
+---------------------------------------------------------------
+
+//Button counter
+
+class Button extends React.Component{
+	state={counter:0};
+  
+  handleClick = () => {
+  	this.setState({
+    counter: this.state.counter + 1
+    })
+  };
+  
+	render(){
+  return (
+  <button onClick={this.handleClick}  >
+  	{this.state.counter}
+  </button>  	
+  );
+  }
+}
+ReactDOM.render(<Button/>,mountNode); 
+
+-------------------------------------------------------------
+
+//Button counter using class
+
+class Button extends React.Component{
+
+	render(){
+  return (
+  <button onClick={this.props.onClickFunction }>
+  	+1
+  </button>  	
+  );
+  }
+}
+
+const Result = (props) => {
+	return(
+  	<div>{props.counter}</div> 
+  ); 
+};
+
+class App extends React.Component{
+	state={counter:0};
+  
+  incrementCounter = () =>{
+  	this.setState((prevState)=>({
+    counter: prevState.counter + 1
+    }));
+  };
+	
+  render(){
+  	return(
+    	<div>
+      	<Button onClickFunction={this.incrementCounter} />
+        <Result counter={this.state.counter} /         >
+      </div>
+    );
+  }
+}
+
+ReactDOM.render(<App />,mountNode); 
+
+
+-------------------------------------------------------------------
+
+//Button counter Multiple
+
+class Button extends React.Component{
+
+handleClick=() =>{
+  	this.props.onClickFunction(this.props.incrementValue)
+  }
+
+	render(){
+  return (
+  <button 
+  onClick={this.handleClick }>
+  	+{this.props.incrementValue}
+  </button>  	
+  );
+  }
+}
+
+const Result = (props) => {	
+	return(<div>{props.counter}</div>); 
+};
+
+class App extends React.Component{ 
+
+	state={counter:116};
+  
+  incrementCounter = (incrementValue) =>{
+  	this.setState((prevState)=>({
+    counter: prevState.counter + incrementValue
+    }));
+  };
+  render(){
+  	return(
+    	<div>
+      	<Button incrementValue={1} onClickFunction={this.incrementCounter} />
+        <Button incrementValue={5} onClickFunction={this.incrementCounter} />
+        <Button incrementValue={10} onClickFunction={this.incrementCounter} />
+        <Button incrementValue={100} onClickFunction={this.incrementCounter} />
+        <Result counter={this.state.counter} />
+      </div>
+    );
+  }
+}
+
+ReactDOM.render(<App />,mountNode); 
+
+
+------------------------------------------------------------
+
+//Rendering constant variable
+
+const Pradeep=(props) =>{
+	return(
+  	<div>
+    	<img src="http://placehold.it/100"/>
+      <div> Name Here...</div>
+      <div>Company Here..</div>
+    </div>
+  );
+};
+ReactDOM.render(<Pradeep />,mountNode);
+
+------------------------------------------------------------
+
+//image alignment and styles in Card(Eg: Pradeep)
+
+const Pradeep=(props) =>{
+	return(
+  	<div>
+    	<img src="http://placehold.it/100"/>
+      <div style={{display: 'inline-block',marginLeft:10}}> 
+      <div style={{fontSize: '1.25em',fontWeight:'bold'}}>
+     		 Name Here...
+         </div>
+      <div>Company Here..</div>
+      </div>
+    </div>
+  );
+};
+ReactDOM.render(<Pradeep />,mountNode);
+
+-------------------------------------------------------------
+
+//Real time github user details in CardList
+
+const Card=(props) =>{
+	return(
+  	<div>
+    	<img width="75" src="https://avatars0.githubusercontent.com/u/1?v=4"/>
+      <div style={{display: 'inline-block',marginLeft:10}}> 
+      <div style={{fontSize: '1.25em',fontWeight:'bold'}}>
+     		 mojombo
+         </div>
+      <div>facebook</div>
+      </div>
+    </div>
+  );
+};
+
+const CardList=(props)=> {
+	return(
+  	<div>
+    <Card />
+    </div>
+  );
+}
+ReactDOM.render(<CardList />,mountNode);
+
+-----------------------------------------------------------------
+
+//passing values through CardList
+const Card=(props) =>{
+	return(
+  	<div>
+    	<img width="75" src={props.avatar_url} />
+      <div style={{display: 'inline-block',marginLeft:10}}> 
+      <div style={{fontSize: '1.25em',fontWeight:'bold'}}>
+     		 {props.name}
+         </div>
+      <div>{props.company}</div>
+      </div>
+    </div>
+  );
+};
+
+const CardList=(props)=> {
+	return(
+  	<div>
+    <Card name="Monjombo "
+    	avatar_url="https://avatars0.githubusercontent.com/u/1?v=4"
+      company="Facebook"
+    
+    />
+    
+    </div>
+  );
+}
+ReactDOM.render(<CardList />,mountNode);
+
+----------------------------------------------------
+
+//CardList Reusable with multiple user
+
+const Card=(props) =>{
+	return(
+  	<div>
+    	<img width="75" src={props.avatar_url} />
+      <div style={{display: 'inline-block',marginLeft:10}}> 
+      <div style={{fontSize: '1.25em',fontWeight:'bold'}}>
+     		 {props.name}
+         </div>
+      <div>{props.company}</div>
+      </div>
+    </div>
+  );
+};
+
+let data=[
+		{name:"Monjombo ", 
+    	avatar_url:"https://avatars0.githubusercontent.com/u/1?v=4",
+      company:"Facebook User"
+    },
+    {name:"pjhyett",
+    	avatar_url:"https://avatars0.githubusercontent.com/u/3?v=4",
+      company:"whatsApp User"
+    },
+	
+];
+
+const CardList=(props)=> {
+	return(
+  	<div>
+    {props.cards.map(card =>  <Card {...card}/>)}    
+    </div>
+  );
+}
+ReactDOM.render(<CardList cards={data} />,mountNode);
+
+-----------------------------------------------------------------------------
+
+//passing Card value in text field and fetching data
+
+function Circle=(radius)=>{
+
+}

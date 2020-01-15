@@ -1,0 +1,446 @@
+*********************  Redux  ***********************************
+
+||=>Component||=>Create Action||=>Dispatch Action||=>Reducers runs in store=>||
+
+1.Store 
+	(i)Reducers
+	(ii)State
+
+2.Reducer
+	(i)State	
+	(ii)Action
+
+3.Subscribe
+
+4.Dispatch
+*********************************************
+
+//Simple logic of Redux concept
+#App.js
+import ReduxDemo from './ReduxDemo';
+export default class App extends React.Component{
+    render(){
+        return(
+            <div>
+                <ReduxDemo />
+            </div>
+        );
+    }
+}
+**********************************************
+#ReduxDemo.js
+import {createStore} from 'redux';
+import React from "react";
+
+export default class ReduxDemo extends React.Component{
+    render(){
+        //step 2: Reducer=> state and action
+        const reducer=function(state,action){
+            if(action.type==="ATTACK"){
+                return action.payload
+            }
+            if(action.type==="GREEN ATTACK"){
+                return action.payload
+            }
+            return state;
+        }
+
+        //step 1: STORE=> reducer and store
+        const store=createStore(reducer,"Peace Bro");
+
+        //step 3: Subscribe
+        store.subscribe(()=>{
+            console.log("Store is ",store.getState());
+        })
+
+        //step 4: Dispatch
+        store.dispatch({type:"ATTACK", payload:"IronMan"})
+        store.dispatch({type:"ATTACK", payload:"HULK"})
+        return(
+            <div>
+                Redux Test
+            </div>
+        );
+    }
+}
+--------------------------------------------------------------------------------
+//increment using Redux--render and dispatch
+
+#src/App.js
+import Counter from './Counter';
+import store from './store/';
+class App extends React.Component {
+    render() {
+        return (
+        <div className='App'>
+            <Counter store={store}/>
+        </div>
+        );
+    }    
+}
+export default App;
+********************************************
+#src/store/index.js
+import {createStore} from 'redux';
+
+const initialState={
+    count:3
+};
+const reducer=(state= initialState,action)=>{
+    console.log('reducer running',action);
+    switch (action.type){
+        case 'INCREMENT':
+            return  Object.assign({},state,{count:state.count+1});
+        default:
+            return state;
+    }
+    return state;
+}
+const store=createStore(reducer);
+export default store;
+
+********************************************
+#src/Counter.js
+import React from 'react';
+import  {connect} from 'react-redux';
+function Counter(props){
+    return(
+        <div>
+            <h1>
+                I am a Counter!!!!
+            </h1>
+            <p>Count:{props.count}</p>
+            <button onClick={props.onIncrementClick}>Increment</button>
+        </div>
+    )
+}
+function mapStateToProps(state){
+    console.log('mapStateToProps',state);
+    return{
+        count:state.count
+    }
+}
+function mapDispatchToProps(dispatch){
+    return { 
+        onIncrementClick:()=>{
+            console.log('clicking ')
+            const action={type:'INCREMENT'};
+            dispatch(action); 
+        }
+    }
+}
+export default connect(mapStateToProps,mapDispatchToProps)(Counter);
+
+--------------------------------------------------------------------------------
+
+//Increment & Decrement Button using redux dispatch
+
+#App.js
+import Counter from './Counter.js';
+import store from './store/';
+export default class App extends React.Component {
+    render() {
+        return (
+        <div className="App">
+            <Counter store={store}/>
+        </div>
+        );
+    }    
+}
+********************************************
+#Counter.js
+import React from 'react';
+import { connect} from 'react-redux';
+function Counter(props){
+    return(
+        <div>
+            <h1>Counter</h1>
+            <p>Count: {props.count}</p>
+            <button onClick={props.onIncrementClick}>Increment</button>
+            <button onClick={props.onDecrementClick}>Decrement</button>
+        </div>
+    );
+}
+function mapStateToProps(state){
+    console.log('mapStateToProps');
+    return {
+        count:state.count
+    }
+}
+function mapDispatchToProps(dispatch){
+    console.log('mapDispatchToProps');
+    return{
+        onIncrementClick:()=>{
+            const action={type:'INCREMENT'};
+            dispatch(action);
+        },
+        onDecrementClick:()=>{
+            const action={type:'DECREMENT'};
+            dispatch(action);
+        }
+    }
+}
+export default connect(mapStateToProps,mapDispatchToProps)(Counter);
+********************************************
+#src/index.js
+import {createStore} from 'redux';
+const initialState={
+    count: 1
+};
+const reducer = (state=initialState ,action)=>{
+    console.log('reducer',action);
+    switch(action.type){
+        case 'INCREMENT':
+            return Object.assign({},state,{count: ++state.count});
+        case 'DECREMENT':
+            return Object.assign({},state,{count: --state.count});
+        default:
+            return state;
+    }    
+}
+const store=createStore(reducer);
+export default store;
+
+--------------------------------------------------------------------------------
+//Dispatch example program
+# app.js
+import Client from './Client';
+export default class App extends React.Component {
+    render() {
+        return (
+        <div className="App">
+        </div>
+        );
+    }    
+}
+**********************************************
+#src/client.js
+import  {createStore} from 'redux';
+const reducer =function(state,action){
+    if(action.type==="INC"){
+        return state+1;
+    }
+    if(action.type==="DEC"){
+        return state-1;
+    }
+    return state;
+
+}
+const store=createStore(reducer, 0);
+store.subscribe(()=>{
+    console.log("store changed",store.getState())
+})
+
+store.dispatch({type:"INC",payload:1})//payload can be any name eg: pradeep, london,paris,etc.,
+store.dispatch({type:"INC",payload:1})
+store.dispatch({type:"INC",payload:1})
+store.dispatch({type:"INC",payload:1})
+store.dispatch({type:"INC",payload:1})
+
+store.dispatch({type:"DEC",payload:1})
+store.dispatch({type:"DEC",payload:1})
+store.dispatch({type:"DEC",payload:1})
+
+--------------------------------------------------------------------------------
+
+//Navigation using Router
+#App.js
+import {BrowserRouter, Route, Switch } from "react-router-dom";
+import Home from "./component/Home";
+import Contact from "./component/Contact";
+import About from "./component/About";
+import Error from "./component/Error";
+import Navigation from "./component/Navigation";
+
+export default class App extends React.Component{
+    render(){
+        return(
+            <BrowserRouter>
+            <div>
+                <Navigation/>
+                <Switch>
+                    <Route path="/" component={Home} exact/>
+                    <Route path="/about" component={About}/>
+                    <Route path="/contact" component={Contact}/>
+                    <Route component={Error}/>
+                </Switch>
+            </div>
+            </BrowserRouter>
+        );
+    }
+}
+****************************************************
+#component/Navigation
+import React from 'react';
+import {NavLink} from 'react-router-dom';
+const Navigation=()=>{
+    return(
+        <div>
+            <h2>
+            <NavLink to="/">Home</NavLink>
+            <NavLink to="/about">About</NavLink> 
+            <NavLink to="/contact">Contact</NavLink> 
+            </h2>
+        </div>
+    );
+}
+export default Navigation;
+
+****************************************************
+#component/Home.js
+import React from 'react';
+
+const Home=()=>{
+    return(
+        <div>
+            <p>Home</p>
+        </div>
+    );
+}
+export default Home;
+*****************************************************
+#component/Contact.js
+import React from 'react';
+
+const Contact=()=>{
+    return(
+        <div>
+            <p>Home</p>
+        </div>
+    );
+}
+export default Contact;
+*****************************************************
+#component/About.js
+import React from 'react';
+
+const About=()=>{
+    return(
+        <div>
+            <p>Error: Path does not Exists</p>
+        </div>
+    );
+}
+export default About;
+*******************************************************
+#component/Error.js
+import React from 'react';
+
+const Error=()=>{
+    return(
+        <div>
+            <p>Error: Path does not Exists</p>
+        </div>
+    );
+}
+export default Error;
+-------------------------------------------------------
+
+//Redux Form Validation
+#App.js
+
+import React from 'react';
+import FormCode from './FormCode';
+
+export default class App extends React.Component {
+  submit = (values) => {
+    alert("submitted");
+    console.log(values);
+  }
+  render() {
+    return (
+      <div className="container">
+        <h3 className="jumbotron">Form Validation using Redux</h3>
+        <FormCode onSubmit={this.submit} />
+      </div>
+      
+    )
+  }
+}
+
+***********************************************
+#index.js
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { createStore, combineReducers } from 'redux';
+import { Provider } from 'react-redux';
+import { reducer as formReducer } from 'redux-form';
+import App from './App';
+import registerServiceWorker from './registerServiceWorker';
+
+const rootReducer = combineReducers({
+    form: formReducer
+});
+
+const store = createStore(rootReducer);
+
+ReactDOM.render(
+<Provider store={store}>
+<App /></Provider>,document.getElementById('root'));
+registerServiceWorker();
+
+****************************************************
+#FormCode.js
+
+import React from 'react';
+import { Field, reduxForm } from 'redux-form';
+
+const validate = values => {
+    const errors = {}
+    if (!values.firstName) {
+      errors.firstName = 'Required'
+    } else if (values.firstName.length < 2) {
+      errors.firstName = 'Minimum be 2 characters or more'
+    }
+    if (!values.email) {
+      errors.email = 'Required'
+    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+      errors.email = 'Invalid email address'
+    }
+    if (!values.lastName) {
+        errors.lastName = 'Required'
+      } else if (values.lastName.length < 2) {
+        errors.lastName = 'Minimum be 2 characters or more'
+      }
+    return errors
+  }
+
+const renderField = ({ input, label, type, meta: { touched, error, warning } }) => (
+    <div>
+      <label className="control-label">{label}</label>
+      <div>
+        <input {...input} placeholder={label} type={type} className="form-control" />
+        {touched && ((error && <span className="text-danger">{error}</span>) || (warning && <span>{warning}</span>))}
+      </div>
+    </div>
+  )
+
+let FormCode = props => {
+  const { handleSubmit, pristine, submitting } = props;
+  return (
+    <form onSubmit={ handleSubmit }>
+      <div className="form-group">
+        <Field name="firstName" component={renderField} label="First Name" />
+      </div>
+      <div className="form-group">
+        <Field name="lastName" component={renderField} label="Last Name" />
+      </div>
+      <div className="form-group">
+        <Field name="email" component={renderField} label="Email" />
+      </div>
+      <div className="form-group">
+        <button type="submit" disabled={pristine || submitting} className="btn btn-primary">Submit</button>
+      </div>
+    </form>
+  )
+}
+FormCode = reduxForm({
+  form: 'contact',
+  validate,
+})(FormCode);
+
+export default FormCode;
+-----------------------------------------------------------------
+
+
+-----------------------------------------------------------------

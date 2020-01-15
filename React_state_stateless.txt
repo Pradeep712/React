@@ -1,0 +1,180 @@
+REACT API FETCHING
+
+#App.js
+import React from "react";
+import Title from './component/Title';
+import Form from './component/Form';
+import Weather from './component/Weather';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import "./App.css"
+const API_KEY="426b1a0196ea7d742cb04d5f8ce51350";
+export default class App extends React.Component{
+    state={//Object(state) instead of using Constructor with state
+        temperature:undefined,
+        city:undefined,
+        country: undefined,
+        humidity:undefined,
+        description: undefined,
+        error: undefined
+    }
+    getWeather=async(e)=>{//loads & helps in fetching the api 
+        e.preventDefault();//Prevent from refresing
+        const city=e.target.elements.city.value;
+        const country=e.target.elements.country.value;        
+        const api_call=await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${API_KEY}&units=metric`);
+        const data=await api_call.json();
+        if(city&&country){
+            //console.log(data);
+            this.setState({
+                temperature:data.main.temp,
+                city:data.name,
+                country:data.sys.country,
+                humidity:data.main.humidity,
+                description:data.weather[0].description,
+                error:''
+            });
+        }
+        else{
+            this.setState({
+            temperature:'',city:'',country:'',humidity:'',description:'',
+            error:"Please enter City & Country Name...."
+            });
+        }
+    }
+    render(){
+        return(
+            <div>
+                <div className="wrapper">
+                    <div className="main">
+                        <div className="container">
+                            <div className="row">
+                                <div className="col-xs-5 title-container">
+                                    <Title />
+                                </div>
+                                <div className="col-xs-7 form-container">
+                                    <Form getWeather={this.getWeather} />
+                                    <Weather
+                                        temperature={this.state.temperature}
+                                        city={this.state.city}
+                                        country={this.state.country}
+                                        humidity={this.state.humidity}
+                                        description={this.state.description}
+                                        error={this.state.error}    
+                                    />
+                                </div>
+                            </div>                
+                        </div>                
+                    </div>                
+                </div>
+            </div>
+        );
+    }
+}
+
+******************************************************
+#component/Title.js
+import React from 'react';
+
+//statefull
+// export default class Title extends React.Component{
+//     render(){
+//         return(
+//             <div>
+//                 <h1>Weather Finder</h1>
+//                 <p>Find Temperature, conditions, etc., here: </p>
+//             </div>
+//         );
+//     }
+// }
+
+//Stateless
+const Title =()=>(
+    <div>
+        <h1 className="title-container__title">Weather Teller</h1>
+        <h3 className="title-container__subtitle">Finds Temperature, conditions, etc., </h3>
+    </div>
+);
+export default Title;
+
+******************************************************
+#component/Form.js
+
+import React from 'react';
+//Statefull
+// export default class Form extends React.Component{
+//     render(){
+//         return(
+//             <form onSubmit={this.props.getWeather}>
+//                 <input type="text" name="city" placeholder="City..."/>
+//                 <input type="text" name="country" placeholder="Country..."/>
+//                 <button>Get Weather</button>
+//             </form>
+//         );
+//     }
+// }
+
+//Stateless
+const Form=props=> (
+    <form onSubmit={props.getWeather}>
+        <input type="text" name="country" placeholder="Country..."/>
+        <input type="text" name="city" placeholder="City..."/>
+        <button>Get Weather</button>
+    </form>
+);
+export default Form;
+
+******************************************************
+
+#component/Weather.js
+import React from 'react';
+
+//Stateful
+// export default class Weather extends React.Component{
+//     render(){
+//         return(
+//             <div>
+//             {this.props.city && this.props.country && <p> Location:{this.props.city},{this.props.country}</p>}
+//             {this.props.temperature && <p>Temperature :{this.props.temperature}</p>}
+//             {this.props.humidity && <p>Humidity    :{this.props.humidity}</p>}
+//             {this.props.description && <p> Description :{this.props.description}</p>}
+//             {this.props.error && <p>{this.props.error}</p>}                              
+//             </div>
+//         );
+//     }
+// }
+
+//Stateless
+const Weather=props=>(
+    <div className="weather__info">
+    {
+        props.city && props.country && 
+        <p className="weather__key"> Location:
+            <span className="weather__value">{props.city},{props.country}</span>
+        </p>
+    }
+    {
+        props.temperature && 
+        <p className="weather__key"> Temperature :
+           <span className="weather__value">{props.temperature}</span>
+        </p>
+    }
+    {   
+        props.humidity && 
+        <p className="weather__key">Humidity    :
+            <span className="weather__value">{props.humidity}</span>
+        </p>
+    }
+    {
+        props.description && 
+        <p className="weather__key"> Description :
+            <span className="weather__value">{props.description}</span>
+        </p>
+    }
+    {
+        props.error &&<p className="weather__value">{props.error}</p>
+    }
+    </div>
+);
+export default Weather;
+
+-----------------------------------------------------------------------

@@ -1,0 +1,547 @@
+ReactDOM.render(<h1>Hello, world!</h1>,document.getElementById('root'));
+
+-----------------------------------------------------------------
+
+var element= React.createElement('h1',{ className:'greeting'},'Hello, World!!');
+ReactDOM.render(element , document.getElementById('root'));
+
+-----------------------------------------------------------------
+
+function formatName(user){
+    return user.firstName + " "+ user.lastName;
+}
+const user={
+    firstName: 'Pradeep',
+    lastName: 'Rajan'
+};
+const element=(
+    <h1> Hello Mr.{formatName(user)}!</h1>
+);
+ReactDOM.render(element,document.getElementById('root'));
+
+-----------------------------------------------------------------
+
+export default class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {date: new Date()};
+  }
+  render() {
+    return (
+      <div>
+        <h2>Time is {this.state.date.toLocaleTimeString()} ...</h2>
+      </div>
+    );
+  }
+}
+
+-----------------------------------------------------------------
+function tick() {
+    const element = (
+      <div>
+        <h1>Clock Ticking!!!</h1>
+        <h2>Time is {new Date().toLocaleTimeString()}.</h2>
+      </div>
+    );
+    ReactDOM.render(element, document.getElementById('root'));
+  }  
+  setInterval(tick, 1000);
+
+const element=<welcome name='Pradeep' />;//User defined components
+function welcome(props){ //defining components using javascript function
+    return <h1>Hello, {props.name}</h1>;
+}
+ReactDOM.render(element,document.getElementById('root'));
+  
+-----------------------------------------------------------------
+
+const name="Pradeep Rajan";
+const element=<h1>Hello, {name}</h1>;
+ReactDOM.render(element,document.getElementById('root'));
+
+-----------------------------------------------------------------
+
+class App extends React.Component{
+  render(){
+      return(
+          <div>
+              <h1>Header</h1>
+              <h2>Content</h2>
+              <p>This is the paragraph</p>
+          </div>
+      );
+  }
+}
+export default App;
+
+-----------------------------------------------------------------
+
+export default class App extends React.Component{
+    render(){
+        return(
+            <div>
+                <Header />
+                <Content />
+            </div>
+        );
+    }
+}
+class Header extends React.Component{
+    render(){
+        return(
+            <h2>Header Component</h2>
+        );
+    }
+}
+class Content extends React.Component{
+    render(){
+        return(
+            <h4>Content Component </h4>
+        );
+    }
+}
+
+-----------------------------------------------------------------
+//Displaying text in react
+
+export default class App extends React.Component{
+    render(){
+        var mystyle={
+            fontSize: 100,
+            color:'#110055'
+        };
+        return(
+            <div>
+                <h1 style={mystyle}>Pradeep</h1>
+            </div>
+        );
+    }
+}
+
+-----------------------------------------------------------------
+//Displaying content in table format
+
+export default class App extends React.Component{
+    constructor(){
+        super();
+        this.state={
+            data:[
+                {
+                    "id":1,
+                    "name":"Pradeep",
+                    "age":"21"
+                },
+                {
+                    "id":2,
+                    "name":"Prabhu",
+                    "age":"20"
+                },
+                {
+                    "id":3,
+                    "name":"Srithar",
+                    "age":22
+                }
+            ]
+        }
+    }
+    render(){
+        return(
+            <div>
+                <table>
+                    <tbody>
+                        {this.state.data.map((person , i) => <TableRow key={i}
+                             data={person} />)}
+                    </tbody>
+                </table>
+            </div>
+        );
+    }
+}
+class TableRow extends React.Component{
+    render(){
+        return(
+            <tr>
+                <td>{this.props.data.id}</td>
+                <td>{this.props.data.name}</td>
+                <td>{this.props.data.age}</td>
+            </tr>
+        );
+    }
+}
+
+-----------------------------------------------------------------
+
+//Statefull component
+  
+export default class App extends React.Component{
+    constructor(props)   {
+        super(props);
+        this.state={
+            header: "Header State",
+            content:"Content state"
+        }
+    }
+    render(){
+        return(
+            <div>
+                <h1> {this.state.header}</h1>
+                <h3> {this.state.content}</h3>
+            </div>
+        );
+    }
+}
+
+-------------------------------------------------------------
+
+//Rendering into state and component mount
+
+export default class App extends React.Component{
+    constructor(props){
+        super(props);
+        this.state={date:new Date()};
+    }
+    componentDidMount(){
+        this.timerID=setInterval(
+            ()=> this.tick(),1000
+        );
+    }
+    componentWillUnmount(){
+        clearInterval(this.timerID);
+    }
+    tick(){
+        console.warn("Error");
+        //console.log("Error");
+        this.setState({
+            date:new Date()
+        });
+    }
+    render(){
+        return(
+            <div>
+            <h1>Hello Everyone!!!!!!</h1>
+            <h3>It is {this.state.date.toLocaleTimeString()}</h3>
+            </div>
+        );
+    }
+}
+
+---------------------------------------------------------------
+
+//Toggle button using button event
+
+export default class App extends React.Component{
+    constructor(props){
+        super(props);
+        this.state={isToggleOn:true};
+        this.handleClick=this.handleClick.bind(this);
+    }
+    handleClick(){
+        this.setState(state=> ({
+            isToggleOn:!state.isToggleOn
+        }));
+
+    }
+    render(){
+        return(
+            <button onClick={this.handleClick}>
+            {this.state.isToggleOn? 'ON':'OFF'}
+            </button>
+        );
+    }
+}
+
+---------------------------------------------------------------
+
+//CONDITIONAL RENDERING
+
+export default class App extends React.Component{
+    constructor(props){
+        super(props);
+        this.handleLoginClick=this.handleLoginClick.bind(this);
+        this.handleLogoutClick=this.handleLogoutClick.bind(this);
+        this.state={isLoggedIn:false};
+    }
+    handleLoginClick(){
+        this.setState({isLoggedIn:true});
+    }
+    handleLogoutClick(){
+        this.setState({isLoggedIn:false});
+    }
+    render(){
+        const isLoggedIn=this.state.isLoggedIn;
+        let button;
+        if(isLoggedIn)
+            button=<LogoutButton onClick={this.handleLogoutClick}/>;
+        else
+            button=<LoginButton onClick={this.handleLoginClick}/>;
+        
+        return(
+            <div>
+                <Greeting isLoggedIn={isLoggedIn} />
+                {button}
+            </div>
+        );
+    }
+}
+function UserGreeting(props){
+    return <h1>Welcome Pradeep!!!</h1>
+}
+function GuestGreeting(props){
+    return <h1>Please Sign up Again!!!</h1>
+}
+function Greeting (props){
+    const isLoggedIn=props.isLoggedIn;
+    if(isLoggedIn)
+        return <UserGreeting />;
+    return <GuestGreeting />;
+}
+function LoginButton(props){
+    return (
+      <button onClick={props.onClick}>Login</button>
+    );
+}
+function LogoutButton(props){
+    return(
+        <button onClick={props.onClick}>
+        Logout
+        </button>
+    );
+}
+ReactDOM.render(<App />,document.getElementById('root'));
+
+-------------------------------------------------------------------------------
+
+function ListItem(props) {
+  return <li>{props.value}</li>;
+}
+function NumberList(props) {
+  const numbers = props.numbers;
+  const listItems = numbers.map((number) =>
+   <ListItem key={number.toString()}value={number} />
+  );
+  return (<ul> {listItems}</ul>);
+}
+const numbers = [1, 2, 3, 4, 5];
+ReactDOM.render(<NumberList numbers={numbers} />,document.getElementById('root'));
+
+
+----------------------------------------------------------------------------------
+class App extends React.Component {
+    constructor(props) {
+       super(props);
+       
+       this.state = {  data: 0}
+       this.setNewNumber = this.setNewNumber.bind(this)
+    };
+    setNewNumber() {
+       this.setState({data: this.state.data + 1})
+    }
+    render() {
+       return (
+          <div>
+             <button onClick = {this.setNewNumber}>INCREMENT</button>
+             <Content myNumber = {this.state.data}></Content>
+          </div>
+       );
+    }
+ }
+ class Content extends React.Component {
+    componentDidMount() {
+        console.log('Component DID MOUNT!')
+     }
+    componentWillMount() {
+       console.log('Component WILL MOUNT!')
+    }
+    
+    componentWillReceiveProps(newProps) {    
+       console.log('Component WILL RECIEVE PROPS!')
+    }
+    shouldComponentUpdate(newProps, newState) {
+       return true;
+    }
+    componentWillUpdate(nextProps, nextState) {
+       console.log('Component WILL UPDATE!');
+    }
+    componentDidUpdate(prevProps, prevState) {
+       console.log('Component DID UPDATE!')
+    }
+    componentWillUnmount() {
+       console.log('Component WILL UNMOUNT!')
+    }
+    render() {
+       return (
+          <div>
+             <h3>{this.props.myNumber}</h3>
+          </div>
+       );
+    }
+ }
+ export default App;
+ReactDOM.render(<App />,document.getElementById('root'));
+setTimeout(() => {
+ReactDOM.unmountComponentAtNode(document.getElementById('root'));}, 10000);
+-------------------------------------------------------------------------------
+
+//Forms updating data in text box using updatestate
+export default class App extends Component{
+    constructor(props){
+        super(props);
+        this.state={
+            data:'Initial data...'
+        }
+        this.updateState=this.updateState.bind(this);
+    };
+    updateState(e){
+        this.setState({data:e.target.value});
+    }
+    render(){
+        return(
+            <div>
+                <input type="text" value={this.state.data} onChange={this.updateState}/>
+                <h4>{this.state.data}</h4>
+            </div>
+        );
+    }
+}
+ReactDOM.render(<App />,document.getElementById('root'));
+
+-----------------------------------------------------------------------------------
+
+//React router
+
+//App.js
+import {BrowserRouter as Router,Switch,Route,Link} from 'react-router-dom';
+import Home from './Home';
+import Login from './Login';
+export default class App extends React.Component{
+    render(){
+        return(
+            <Router>
+                <div>
+                    <h2>React Router</h2>
+                    <ol>
+                        <li><Link to={'/Home'}>Home</Link></li>
+                        <li><Link to={'/Login'}>Login</Link></li>
+                    </ol>
+                    <hr/>
+                    <Switch>
+                        <Route exact path='/Home' component={Home}/>
+                        <Route exact path='/Login' component={Login}/>
+                    </Switch>
+                </div>
+            </Router>
+        );
+    }
+}
+
+//Home.js
+import React from 'react';
+export default class Home extends React.Component{
+    render(){
+        return(
+            <div>
+                <h2>Home</h2>
+            </div>
+        );
+    }
+}
+
+//Login.js
+
+import React from 'react';
+export default class Login extends React.Component{
+    render(){
+        return(
+            <div>
+                <h2>Login</h2>
+            </div>
+        );
+    }
+}
+-----------------------------------------------------------------------------------
+
+// Form event
+
+export default class App extends React.Component{
+    constructor(props){
+        super(props);
+        this.state={value:'Vanilla'};
+        this.handleChange=this.handleChange.bind(this);
+        this.handleSubmit=this.handleSubmit.bind(this);
+        }
+        handleChange(event){
+            this.setState({value:event.target.value});
+        }
+        handleSubmit(event){
+            alert('Your Favorite Ice cream is: '+this.state.value);
+            event.preventDefault();
+        }
+    render(){
+        return(
+            <form onSubmit={this.handleSubmit}>
+            Select your Favorite Icecream:
+            <select value={this.state.value} onChange={this.handleChange}>
+            <option value="Strawberry">Strawberry</option>
+            <option value="Chocolate">Chocolate</option>
+            <option value="Redvelvot">Redvelvot</option>
+            </select>
+            <button type="submit"  value="submit">Submit</button>
+            </form>
+        );
+    }
+}
+
+----------------------------------------------------------------------------
+
+//Lifting state Up
+function BoilVerdict(props){
+    if(props.celsius>=100)
+        return <p>Water will boil</p>
+    else
+        return <p>Water would not boil</p>
+}
+export default class App extends React.Component{
+    constructor(props){
+        super(props);
+        this.handleChange=this.handleChange.bind(this);
+        this.state={temperature: ''};
+    }
+    handleChange(e){
+        this.setState({temperature: e.target.value});
+    }
+    render(){
+        const temperature=this.state.temperature;
+        return(
+            <fieldset>
+                <legend>Enter temperature in Celsius: </legend>
+                <input type="text" value={temperature} onChange={this.handleChange}/>
+                <BoilVerdict celsius={parseFloat(temperature)}/>
+            </fieldset>
+        )
+    }
+}
+
+----------------------------------------------------------------------------
+//changing component using rendering and flashing 
+
+export default class Layout extends React.Component{
+    constructor(){
+        super();
+        this.state={name:"Will"};
+    }
+    render(){
+        setTimeout(()=>{this.setState({name:"Bob"});
+    },1000)
+        return(
+            <div>
+            <h1>{this.state.name}</h1>
+            </div>
+        );
+    }
+} 
+----------------------------------------------------------------------------
+
+
+----------------------------------------------------------------------------
+
+----------------------------------------------------------------------------
