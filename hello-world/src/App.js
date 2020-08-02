@@ -50,14 +50,27 @@ import Counter from './component/Counter';
 //   }
 // }
 
-class App extends Component {
-  render() {
+//setState Co
+// class App extends Component {
+//   render() {
+//     return (
+//       <div className="App">
+//         <Counter />
+//       </div>
+//     );
+//   }
+// }
+
+class App extends Component{
+  render(){
     return (
-      <div className="App">
-        <Counter />
+     <div className="App">
+        <Greet name='Jones' heroName='BatMan'>
+        </Greet>
+        <Welcome name='Pradeep' heroName='Ironman'>
+        </Welcome>
       </div>
-    );
+    )
   }
 }
-
 export default App;
