@@ -5,6 +5,7 @@ import {Greet}  from './component/Greet';
 import Welcome from './component/Welcome';
 import Hello from './component/Hello'
 import Message from './component/Message'
+import Counter from './component/Counter';
 
 // function App() {
 //   return (
@@ -38,12 +39,22 @@ import Message from './component/Message'
 //   }
 // }
 
-//State usage in components
+// //State usage in components
+// class App extends Component {
+//   render() {
+//     return (
+//       <div className="App">
+//         <Message />
+//       </div>
+//     );
+//   }
+// }
+
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <Message />
+        <Counter />
       </div>
     );
   }
