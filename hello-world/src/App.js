@@ -1,24 +1,35 @@
 import React , {Component} from 'react';
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
-import {Greet}  from './component/Greet';
-import Welcome from './component/Welcome';
-import Hello from './component/Hello'
-import Message from './component/Message'
-import Counter from './component/Counter';
-import EventBind from './component/EventBind';
-import ParentComponent from './component/ParentComponent';
+// import {Greet}  from './component/Greet';
+// import Welcome from './component/Welcome';
+// import Hello from './component/Hello'
+// import Message from './component/Message'
+// import Counter from './component/Counter';
+// import EventBind from './component/EventBind';
+// import ParentComponent from './component/ParentComponent';
+import UserGreeting from './component/UserGreeting';
 
-//Method as Props
 class App extends Component{
   render(){
     return(
       <div className="App">
-        <ParentComponent />
+        <UserGreeting />
       </div>
-    );
+    )
   }
 }
+
+// //Method as Props
+// class App extends Component{
+//   render(){
+//     return(
+//       <div className="App">
+//         <ParentComponent />
+//       </div>
+//     );
+//   }
+// }
 
 // //Event Handlers
 // class App extends Component {
