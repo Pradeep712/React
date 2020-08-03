@@ -6,6 +6,18 @@ import Welcome from './component/Welcome';
 import Hello from './component/Hello'
 import Message from './component/Message'
 import Counter from './component/Counter';
+import EventBind from './component/EventBind';
+
+//Event Handlers
+class App extends Component {
+  render() {
+    return (
+      <div className="App">
+        <EventBind />
+      </div>
+    );
+  }
+}
 
 // function App() {
 //   return (
@@ -61,16 +73,17 @@ import Counter from './component/Counter';
 //   }
 // }
 
-class App extends Component{
-  render(){
-    return (
-     <div className="App">
-        <Greet name='Jones' heroName='BatMan'>
-        </Greet>
-        <Welcome name='Pradeep' heroName='Ironman'>
-        </Welcome>
-      </div>
-    )
-  }
-}
+//Props and State management
+// class App extends Component{
+//   render(){
+//     return (
+//      <div className="App">
+//         <Greet name='Jones' heroName='BatMan'>
+//         </Greet>
+//         <Welcome name='Pradeep' heroName='Ironman'>
+//         </Welcome>
+//       </div>
+//     )
+//   }
+// }
 export default App;
