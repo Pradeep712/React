@@ -7,17 +7,29 @@ import Hello from './component/Hello'
 import Message from './component/Message'
 import Counter from './component/Counter';
 import EventBind from './component/EventBind';
+import ParentComponent from './component/ParentComponent';
 
-//Event Handlers
-class App extends Component {
-  render() {
-    return (
+//Method as Props
+class App extends Component{
+  render(){
+    return(
       <div className="App">
-        <EventBind />
+        <ParentComponent />
       </div>
     );
   }
 }
+
+// //Event Handlers
+// class App extends Component {
+//   render() {
+//     return (
+//       <div className="App">
+//         <EventBind />
+//       </div>
+//     );
+//   }
+// }
 
 // function App() {
 //   return (
