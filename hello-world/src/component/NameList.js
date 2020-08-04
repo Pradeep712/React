@@ -2,10 +2,16 @@ import React from 'react'
 import Person from './Person'
 
 function NameList() {
-    const names = ['Tony', 'Steve', 'Natasha']
+    const names = ['Tony', 'Steve', 'Natasha','Tony']
 
-    //Refator jsx in a component
-    const nameList = names.map(name => <h1>{name}</h1>)
+    //Index as key anti-pattern
+    const nameList = names.map((name,index)=><h2 key={index}>{index}. {name}</h2>)
+    
+    //Applicable for name without duplication
+    // const nameList = names.map(name=><h2 key={name}>{name}</h2>)
+
+    // //Refator jsx in a component
+    // const nameList = names.map(name => <h1>{name}</h1>)
 
     const persons =[
         {
@@ -38,7 +44,9 @@ function NameList() {
     //person is a prop for child function
 
     return (
-        <div>{personList}</div>
+        <div>{nameList}</div>
+
+        // <div>{personList}</div>
 
         //  // Render the refactored component simply
         // <div>{nameList}</div>

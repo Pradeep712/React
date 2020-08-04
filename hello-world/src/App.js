@@ -8,9 +8,10 @@ import './App.css';
 // import Counter from './component/Counter';
 // import EventBind from './component/EventBind';
 // import ParentComponent from './component/ParentComponent';
-import UserGreeting from './component/UserGreeting';
+// import UserGreeting from './component/UserGreeting';
 import NameList from './component/NameList';
 
+// List using index as key anti-pattern
 class App extends Component{
   render(){
     return(
