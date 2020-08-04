@@ -14,18 +14,30 @@ import './App.css';
 // import Inline from './component/Inline';
 // import './appStyles.css'
 // import styles from './appStyles.module.css' //module styles must be import like above
-import Form from './component/Form';
+// import Form from './component/Form';
+import LifecycleA from './component/LifecycleA'
 
-//Form Handling
 class App extends Component{
   render(){
     return(
       <div className="App">
-        <Form />
+        <LifecycleA />
       </div>
     )
   }
 }
+
+
+// //Form Handling
+// class App extends Component{
+//   render(){
+//     return(
+//       <div className="App">
+//         <Form />
+//       </div>
+//     )
+//   }
+// }
 
 // //Styling and CSS Basics
 // class App extends Component{
