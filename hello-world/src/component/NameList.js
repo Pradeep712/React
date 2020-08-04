@@ -6,6 +6,8 @@ function NameList() {
 
     //Index as key anti-pattern
     const nameList = names.map((name,index)=><h2 key={index}>{index}. {name}</h2>)
+    // Online example
+    // https://codepen.io/gopinav/pen/gQpepq
     
     //Applicable for name without duplication
     // const nameList = names.map(name=><h2 key={name}>{name}</h2>)
