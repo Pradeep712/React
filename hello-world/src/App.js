@@ -15,13 +15,18 @@ import './App.css';
 // import './appStyles.css'
 // import styles from './appStyles.module.css' //module styles must be import like above
 // import Form from './component/Form';
-import LifecycleA from './component/LifecycleA'
+// import LifecycleA from './component/LifecycleA'
+import FragmentDemo from './component/FragmentDemo';
+import Table from './component/Table';
 
 class App extends Component{
   render(){
     return(
       <div className="App">
-        <LifecycleA />
+        <FragmentDemo />
+        <Table />
+
+        {/* <LifecycleA /> */}
       </div>
     )
   }
