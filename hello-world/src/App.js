@@ -16,21 +16,36 @@ import './App.css';
 // import styles from './appStyles.module.css' //module styles must be import like above
 // import Form from './component/Form';
 // import LifecycleA from './component/LifecycleA'
-import FragmentDemo from './component/FragmentDemo';
-import Table from './component/Table';
+// import FragmentDemo from './component/FragmentDemo';
+// import Table from './component/Table';
+import PureComp from './component/PureComp';
+import ParentComp from './component/ParentComp';
 
 class App extends Component{
   render(){
     return(
       <div className="App">
-        <FragmentDemo />
-        <Table />
-
-        {/* <LifecycleA /> */}
+        <ParentComp />
+        {/* <PureComp /> */}
       </div>
     )
   }
 }
+
+
+// //Fragment or EmptyTag
+// class App extends Component{
+//   render(){
+//     return(
+//       <div className="App">
+//         <FragmentDemo />
+//         <Table />
+
+//         {/* <LifecycleA /> */}
+//       </div>
+//     )
+//   }
+// }
 
 
 // //Form Handling
