@@ -21,6 +21,7 @@ import './App.css';
 import PureComp from './component/PureComp';
 import ParentComp from './component/ParentComp';
 
+//PureComponent & Memo
 class App extends Component{
   render(){
     return(
