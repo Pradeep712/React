@@ -20,14 +20,17 @@ import './App.css';
 // import Table from './component/Table';
 // import PureComp from './component/PureComp';
 // import ParentComp from './component/ParentComp';
-import RefsDemo from './component/RefsDemo';
+// import RefsDemo from './component/RefsDemo';
+import FocusInput from './component/FocusInput';
+
 
 //Refs
 class App extends Component{
   render(){
     return(
       <div className="App">
-        <RefsDemo />
+        <FocusInput />
+        {/* <RefsDemo /> */}
       </div>
     )
   }
