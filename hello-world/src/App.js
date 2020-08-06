@@ -22,22 +22,34 @@ import './App.css';
 // import ParentComp from './component/ParentComp';
 // import RefsDemo from './component/RefsDemo';
 // import FocusInput from './component/FocusInput';
-import FRParentInput from './component/FRParentInput';
+// import FRParentInput from './component/FRParentInput';
+import PortalDemo from './component/PortalDemo';
 
-
-//Refs with Forward input
-// https://www.youtube.com/watch?v=RLWniwmfdq4&list=PLC3y8-rFHvwgg3vaYJgHGnModB54rxOk3&index=30
+//Portals
+// https://www.youtube.com/watch?v=HpHLa-5Wdys&list=PLC3y8-rFHvwgg3vaYJgHGnModB54rxOk3&index=31
 class App extends Component{
   render(){
     return(
       <div className="App">
-        <FRParentInput />
-        {/* <FocusInput /> */}
-        {/* <RefsDemo /> */}
+        <PortalDemo />
       </div>
     )
   }
 }
+
+//Refs with Forward input
+// https://www.youtube.com/watch?v=RLWniwmfdq4&list=PLC3y8-rFHvwgg3vaYJgHGnModB54rxOk3&index=30
+// class App extends Component{
+//   render(){
+//     return(
+//       <div className="App">
+//         <FRParentInput />
+//         {/* <FocusInput /> */}
+//         {/* <RefsDemo /> */}
+//       </div>
+//     )
+//   }
+// }
 
 // //PureComponent & Memo
 // class App extends Component{
