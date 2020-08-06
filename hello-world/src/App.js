@@ -21,15 +21,18 @@ import './App.css';
 // import PureComp from './component/PureComp';
 // import ParentComp from './component/ParentComp';
 // import RefsDemo from './component/RefsDemo';
-import FocusInput from './component/FocusInput';
+// import FocusInput from './component/FocusInput';
+import FRParentInput from './component/FRParentInput';
 
 
-//Refs
+//Refs with Forward input
+// https://www.youtube.com/watch?v=RLWniwmfdq4&list=PLC3y8-rFHvwgg3vaYJgHGnModB54rxOk3&index=30
 class App extends Component{
   render(){
     return(
       <div className="App">
-        <FocusInput />
+        <FRParentInput />
+        {/* <FocusInput /> */}
         {/* <RefsDemo /> */}
       </div>
     )
