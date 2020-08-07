@@ -1,4 +1,4 @@
-import React , {Component} from 'react';
+import React, { Component } from 'react';
 // import logo from './logo.svg';
 import './App.css';
 // import {Greet}  from './component/Greet';
@@ -23,19 +23,44 @@ import './App.css';
 // import RefsDemo from './component/RefsDemo';
 // import FocusInput from './component/FocusInput';
 // import FRParentInput from './component/FRParentInput';
-import PortalDemo from './component/PortalDemo';
+// import PortalDemo from './component/PortalDemo';
+import Hero from './component/Hero';
+import ErrorBoundary from './component/ErrorBoundary';
 
-//Portals
-// https://www.youtube.com/watch?v=HpHLa-5Wdys&list=PLC3y8-rFHvwgg3vaYJgHGnModB54rxOk3&index=31
-class App extends Component{
-  render(){
-    return(
+//Error Boundary
+// https://www.youtube.com/watch?v=DNYXgtZBRPE&list=PLC3y8-rFHvwgg3vaYJgHGnModB54rxOk3&index=32
+class App extends Component {
+  render() {
+    return (
       <div className="App">
-        <PortalDemo />
+        {/* Error boundary can be within the component or within the entire applications */}
+        <ErrorBoundary>
+          <Hero heroName="Batman" />
+        </ErrorBoundary>
+
+        <ErrorBoundary>
+          <Hero heroName="Superman" />
+        </ErrorBoundary>
+
+        <ErrorBoundary>
+          <Hero heroName="Joker" />
+        </ErrorBoundary>
       </div>
     )
   }
 }
+
+//Portals
+// https://www.youtube.com/watch?v=HpHLa-5Wdys&list=PLC3y8-rFHvwgg3vaYJgHGnModB54rxOk3&index=31
+// class App extends Component {
+//   render() {
+//     return (
+//       <div className="App">
+//         <PortalDemo />
+//       </div>
+//     )
+//   }
+// }
 
 //Refs with Forward input
 // https://www.youtube.com/watch?v=RLWniwmfdq4&list=PLC3y8-rFHvwgg3vaYJgHGnModB54rxOk3&index=30
@@ -165,7 +190,7 @@ class App extends Component{
 
 //         <Welcome name='Jones' heroName='BatMan'/>
 //         <Welcome name='Hayas' heroName='Joker' />
-        
+
 //         {/* <Hello /> */}
 //       </div>
 //     );
