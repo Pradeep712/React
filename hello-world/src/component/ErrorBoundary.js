@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-export class ErrorBoundary extends Component {
+class ErrorBoundary extends Component {
     constructor(props) {
         super(props)
     
@@ -13,7 +13,7 @@ export class ErrorBoundary extends Component {
             hasError:true
         }
     }
-    //Catches Error from the component
+    //Catches Error from the component thats needs to be logged
     componentDidCatch = (error,info) =>{
         console.log(`error ${error}`)
         console.log(info)
@@ -23,7 +23,7 @@ export class ErrorBoundary extends Component {
         if(this.state.hasError){
             return  <h1>Something went wrong</h1>
         }
-      return this.props.children
+      return this.props.children//'children' element returns child components
     }
 }
 
