@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
 import './App.css';
-import ClassCounter from './component/ClassCounter';
-import HookCounter from './component/HookCounter';
+import HookCounterTwo from './component/HookCounterTwo';
 
 class App extends Component {
   render() {
     return (
       <div className='App'>
-        <ClassCounter/>
-        <HookCounter />
+        <HookCounterTwo />
       </div>
     )
   }
