@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import './App.css';
-import HookCounterFour from './component/HookCounterFour';
+import HookUseEffect from './component/HookUseEffect';
 
 class App extends Component {
   render() {
     return (
       <div className='App'>
-        <HookCounterFour />
+        <HookUseEffect />
       </div>
     )
   }
